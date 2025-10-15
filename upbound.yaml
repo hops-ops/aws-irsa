@@ -1,0 +1,31 @@
+apiVersion: meta.dev.upbound.io/v2alpha1
+kind: Project
+metadata:
+  name: hops-xrd-irsa
+spec:
+  dependsOn:
+  - apiVersion: pkg.crossplane.io/v1
+    kind: Provider
+    package: xpkg.crossplane.io/crossplane-contrib/provider-kubernetes
+    version: '>=v1.0.0'
+  - apiVersion: pkg.crossplane.io/v1
+    kind: Provider
+    package: xpkg.crossplane.io/crossplane-contrib/provider-helm
+    version: '>=v1.0.2'
+  - apiVersion: pkg.crossplane.io/v1
+    kind: Provider
+    package: xpkg.crossplane.io/crossplane-contrib/provider-aws-iam
+    version: '>=v2.1.1'
+  - apiVersion: pkg.crossplane.io/v1
+    kind: Function
+    package: xpkg.crossplane.io/crossplane-contrib/function-auto-ready
+    version: '>=v0.5.1'
+  description: XRD for configuring IRSA.
+  license: Apache-2.0
+  maintainer: Patrick Lee Scott <pat@patscott.io
+  readme: |
+    # hops-xrd-irsa
+
+    Configures IAM Roles for Service Accounts (IRSA) on EKS clusters.
+  repository: ghcr.io/unbounded-tech/hops-xrd-irsa
+  source: github.com/upbound/project-template

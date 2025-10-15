@@ -1,0 +1,41 @@
+apiVersion: hops.unbounded-tech.com/v1alpha1
+kind: XIRSA
+metadata:
+  name: example-irsa
+spec:
+  clusterName: cluster-x
+  aws:
+    providerConfig: cluster-x
+  accountId: "123456789012"
+  name: "loki-irsa"
+  oidc: "eks.amazonaws.com"
+  permissionsBoundary: "arn:aws:iam::aws:policy/ReadOnlyAccess"
+  policy: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "LokiStorage",
+          "Effect": "Allow",
+          "Action": [
+            "s3:ListBucket",
+            "s3:PutObject",
+            "s3:GetObject",
+            "s3:DeleteObject"
+          ],
+          "Resource": [
+            "arn:aws:s3:::example-loki-chunks",
+            "arn:aws:s3:::example-loki-chunks/*",
+            "arn:aws:s3:::example-loki-ruler",
+            "arn:aws:s3:::example-loki-ruler/*"
+          ]
+        }
+      ]
+    }
+  rolePrefix: "irsa-"
+  policyPrefix: "irsa-"
+  tags:
+    foo: bar
+  serviceAccount:
+    namespace: "loki"
+    name: "loki-serviceaccount"

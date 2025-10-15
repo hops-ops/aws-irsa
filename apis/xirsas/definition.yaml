@@ -1,0 +1,61 @@
+apiVersion: apiextensions.crossplane.io/v2
+kind: CompositeResourceDefinition
+metadata:
+  name: xirsas.hops.unbounded-tech.com
+spec:
+  group: hops.unbounded-tech.com
+  names:
+    categories:
+    - crossplane
+    kind: XIRSA
+    plural: xirsas
+  scope: Cluster
+  versions:
+  - name: v1alpha1
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        description: XIRSA is the Schema for the XIRSA API.
+        properties:
+          spec:
+            description: XIRSASpec defines the desired state of XIRSA.
+            properties:
+              accountId:
+                type: string
+              aws:
+                properties:
+                  providerConfig:
+                    type: string
+                type: object
+              clusterName:
+                type: string
+              name:
+                type: string
+              oidc:
+                type: string
+              permissionsBoundary:
+                type: string
+              policy:
+                type: string
+              policyPrefix:
+                type: string
+              rolePrefix:
+                type: string
+              serviceAccount:
+                properties:
+                  name:
+                    type: string
+                  namespace:
+                    type: string
+                type: object
+              tags:
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+            type: object
+          status:
+            description: XIRSAStatus defines the observed state of XIRSA.
+            type: object
+        required:
+        - spec
+        type: object
+    served: true

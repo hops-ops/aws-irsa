@@ -1,0 +1,43 @@
+# code: language=yaml
+# yaml-language-server: $schema=../../.up/json/models/index.schema.json
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: {{ $rolePrefix }}{{$clusterName}}-{{ $name }}
+  annotations:
+    gotemplating.fn.crossplane.io/composition-resource-name: "irsa-role"
+  labels:
+    irsa: {{ $name }}
+spec:
+  providerConfigRef:
+    name: {{ $awsProviderConfig }}
+  deletionPolicy: {{ $deletionPolicy }}
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Federated": "arn:aws:iam::{{ $accountId }}:oidc-provider/{{ $oidc }}"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+              "StringEquals": {
+                "{{ $oidc }}:sub": "system:serviceaccount:{{ $serviceAccountNamespace }}:{{ $serviceAccountName }}"
+              }
+            }
+          }
+        ]
+      }
+    {{- if $permissionsBoundary }}
+    permissionsBoundary: {{ $permissionsBoundary }}
+    {{- end }}
+    {{- if $tags }}
+    tags:
+      {{ toYaml $tags | nindent 6 }}
+    {{- end }}
