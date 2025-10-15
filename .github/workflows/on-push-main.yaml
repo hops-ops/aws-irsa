@@ -17,7 +17,8 @@ jobs:
     with:
       examples: |
         [
-          "examples/xirsas/example.yaml"
+          "examples/xirsas/example.yaml",
+           "examples/xirsas/example-minimal.yaml"
         ]
       api_path: apis/xirsas
       error_on_missing_schemas: true
