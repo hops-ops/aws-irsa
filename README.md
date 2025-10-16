@@ -99,7 +99,7 @@ spec:
 Deploy Cert-Manager with Let's Encrypt integration:
 
 ```yaml
-apiVersion: hops.unbounded-tech.com/v1alpha1
+apiVersion: hops.ops.com.ai/v1alpha1
 kind: XCertManager
 metadata:
   name: irsa

@@ -1,3 +1,7 @@
+clean:
+	rm -rf _output
+	rm -rf .up
+
 build:
 	up project build
 
