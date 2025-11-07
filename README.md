@@ -1,7 +1,7 @@
 
-# configuration-irsa
+# configuration-aws-irsa
 
-`configuration-irsa` is a Crossplane configuration package that provisions IAM Roles for Service Accounts (IRSA) so Kubernetes workloads can assume AWS roles without shipping static credentials. It publishes the `XIRSA` composite resource definition that standardises how teams request IAM access for a given service account.
+`configuration-aws-irsa` is a Crossplane configuration package that provisions IAM Roles for Service Accounts (IRSA) so Kubernetes workloads can assume AWS roles without shipping static credentials. It publishes the `XIRSA` composite resource definition that standardises how teams request IAM access for a given service account.
 
 ## Features
 
@@ -27,9 +27,9 @@
 apiVersion: pkg.crossplane.io/v1
 kind: Configuration
 metadata:
-  name: configuration-irsa
+  name: configuration-aws-irsa
 spec:
-  package: ghcr.io/hops-ops/configuration-irsa:latest
+  package: ghcr.io/hops-ops/configuration-aws-irsa:latest
   packagePullSecrets:
     - name: ghcr
   skipDependencyResolution: true
@@ -200,8 +200,8 @@ Apache-2.0 License. See [LICENSE](LICENSE) for details.
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/hops-ops/configuration-irsa/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/hops-ops/configuration-irsa/discussions)
+- **Issues**: [GitHub Issues](https://github.com/hops-ops/configuration-aws-irsa/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/hops-ops/configuration-aws-irsa/discussions)
 
 ## Maintainer
 
@@ -209,7 +209,7 @@ Apache-2.0 License. See [LICENSE](LICENSE) for details.
 
 ## Links
 
-- **GitHub Repository**: [github.com/hops-ops/configuration-irsa](https://github.com/hops-ops/configuration-irsa)
-- **Container Registry**: [ghcr.io/hops-ops/configuration-irsa](ghcr.io/hops-ops/configuration-irsa)
+- **GitHub Repository**: [github.com/hops-ops/configuration-aws-irsa](https://github.com/hops-ops/configuration-aws-irsa)
+- **Container Registry**: [ghcr.io/hops-ops/configuration-aws-irsa](ghcr.io/hops-ops/configuration-aws-irsa)
 - **Documentation**: [docs.crossplane.io](https://docs.crossplane.io/)
 - **Cert-Manager**: [irsa.io](https://irsa.io/)

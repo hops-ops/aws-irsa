@@ -1,7 +1,7 @@
 apiVersion: meta.dev.upbound.io/v2alpha1
 kind: Project
 metadata:
-  name: configuration-irsa
+  name: configuration-aws-irsa
 spec:
   dependsOn:
   - apiVersion: pkg.crossplane.io/v1
@@ -24,8 +24,8 @@ spec:
   license: Apache-2.0
   maintainer: Patrick Lee Scott <pat@patscott.io
   readme: |
-    # configuration-irsa
+    # configuration-aws-irsa
 
     Configures IAM Roles for Service Accounts (IRSA) on EKS clusters.
-  repository: ghcr.io/hops-ops/configuration-irsa
+  repository: ghcr.io/hops-ops/configuration-aws-irsa
   source: github.com/upbound/project-template
