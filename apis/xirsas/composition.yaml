@@ -4,7 +4,7 @@ metadata:
   name: configuration-irsa-v1alpha1-1
 spec:
   compositeTypeRef:
-    apiVersion: hops.ops.com.ai/v1alpha1
+    apiVersion: aws.hops.ops.com.ai/v1alpha1
     kind: XIRSA
   mode: Pipeline
   pipeline:

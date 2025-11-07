@@ -1,9 +1,9 @@
 apiVersion: apiextensions.crossplane.io/v2
 kind: CompositeResourceDefinition
 metadata:
-  name: xirsas.hops.ops.com.ai
+  name: xirsas.aws.hops.ops.com.ai
 spec:
-  group: hops.ops.com.ai
+  group: aws.hops.ops.com.ai
   names:
     categories:
     - crossplane

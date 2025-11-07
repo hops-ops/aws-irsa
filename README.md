@@ -38,7 +38,7 @@ spec:
 ## Example Composite
 
 ```yaml
-apiVersion: hops.ops.com.ai/v1alpha1
+apiVersion: aws.hops.ops.com.ai/v1alpha1
 kind: XIRSA
 metadata:
   name: example-irsa
