@@ -1,15 +1,25 @@
+import base64
 import file
 import models.ai.com.ops.hops.aws.v1alpha1 as awsv1alpha1
 import models.io.upbound.dev.meta.v1alpha1 as metav1alpha1
 import models.io.upbound.dev.meta.v2alpha1 as metav2alpha1
 import models.k8s.apimachinery.pkg.apis.meta.v1 as metav1
 
-_aws_secret_key = file.read_env("AWS_SECRET_KEY")
-_aws_access_key = file.read_env("AWS_ACCESS_KEY")
+_workdir = file.workdir()
+_modpath = file.modpath()
+_files = file.glob("*")
+_files_str = ", ".join(_files)
+_creds = file.read("aws-creds")
+_base64_creds = base64.encode(_creds)
+
+
+
+# _file_exists = file.exists(_workdir + "/creds")
+# _credential_file = file.read(_workdir + "/creds")
+# _encoded_credential_file = base64.encode(_credential_file)
 
 _test_policy_document = "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": [\"s3:GetObject\"],\n      \"Resource\": [\"arn:aws:s3:::example-bucket/*\"]\n    }\n  ]\n}"
 
-_credential_data = "aws_access_key_id=${_aws_access_key}\naws_secret_access_key=${_aws_secret_key}"
 
 _items = [
     metav1alpha1.E2ETest{
@@ -39,33 +49,46 @@ _items = [
             extraResources: [
                 {
                     apiVersion: "v1"
+                    kind: "ConfigMap"
+                    metadata: {
+                        name: "job-config"
+                        namespace: "default"
+                    }
+                    data: {
+                        workdir: _workdir
+                        modpath: _modpath
+                        files: _files_str
+                    }
+                },
+                {
+                    apiVersion: "v1"
                     kind: "Secret"
                     metadata: {
                         name: "aws-creds"
                         namespace: "default"
                     }
-                    stringData: {
-                        "creds": _credential_data
+                    data: {
+                        creds: _base64_creds
                     }
                 },
-                {
-                    apiVersion: "aws.m.upbound.io/v1beta1"
-                    kind: "ProviderConfig"
-                    metadata: {
-                        name: "default"
-                        namespace: "default"
-                    }
-                    spec: {
-                        credentials: {
-                            source: "Secret"
-                            secretRef: {
-                                namespace: "default"
-                                name: "aws-creds"
-                                key: "creds"
-                            }
-                        }
-                    }
-                }
+                # {
+                #     apiVersion: "aws.m.upbound.io/v1beta1"
+                #     kind: "ProviderConfig"
+                #     metadata: {
+                #         name: "default"
+                #         namespace: "default"
+                #     }
+                #     spec: {
+                #         credentials: {
+                #             source: "Secret"
+                #             secretRef: {
+                #                 namespace: "default"
+                #                 name: "aws-creds"
+                #                 key: "creds"
+                #             }
+                #         }
+                #     }
+                # }
             ]
             skipDelete: False
             timeoutSeconds: 4500
