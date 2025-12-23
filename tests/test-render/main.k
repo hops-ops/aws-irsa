@@ -88,7 +88,7 @@ _items = [
                 }
             ]
             compositionPath: "apis/irsas/composition.yaml"
-            xrPath: "examples/irsas/example.yaml"
+            xrPath: "examples/irsas/standard.yaml"
             xrdPath: "apis/irsas/definition.yaml"
             timeoutSeconds: 120
             validate: True
@@ -162,7 +162,7 @@ _items = [
                 }
             ]
             compositionPath: "apis/irsas/composition.yaml"
-            xrPath: "examples/irsas/example-minimal.yaml"
+            xrPath: "examples/irsas/minimal.yaml"
             xrdPath: "apis/irsas/definition.yaml"
             timeoutSeconds: 120
             validate: True

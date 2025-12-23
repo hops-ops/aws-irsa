@@ -4,15 +4,15 @@ PACKAGE ?= configuration-aws-irsa
 XRD_DIR := apis/irsas
 COMPOSITION := $(XRD_DIR)/composition.yaml
 DEFINITION := $(XRD_DIR)/definition.yaml
-EXAMPLE_DEFAULT := examples/irsas/example.yaml
+EXAMPLE_DEFAULT := examples/irsas/standard.yaml
 RENDER_TESTS := $(wildcard tests/test-*)
 E2E_TESTS := $(wildcard tests/e2etest-*)
 
 # Examples list - mirrors GitHub Actions workflow
 # Format: example_path::observed_resources_path (observed_resources_path is optional)
 EXAMPLES := \
-    examples/irsas/example-minimal.yaml:: \
-    examples/irsas/example.yaml::
+    examples/irsas/minimal.yaml:: \
+    examples/irsas/standard.yaml::
 
 clean:
 	rm -rf _output
