@@ -44,7 +44,6 @@ metadata:
   name: example-irsa
 spec:
   clusterName: cluster-x
-  deletionPolicy: Orphan
   awsProviderConfig: shared-aws
   accountId: "123456789012"
   name: loki
