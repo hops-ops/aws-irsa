@@ -65,7 +65,6 @@ spec:
                     description: External name of existing IAM policy to import. Leave empty to create new.
                 required:
                 - document
-                type: object
               providerConfigRef:
                 type: object
                 description: Reference to the AWS ProviderConfig.
@@ -77,7 +76,6 @@ spec:
                     type: string
                     description: Kind of the ProviderConfig.
                     default: ProviderConfig
-                type: object
               role:
                 type: object
                 description: IAM role configuration.
@@ -91,7 +89,6 @@ spec:
                   externalName:
                     type: string
                     description: External name of existing IAM role to import. Leave empty to create new.
-                type: object
               serviceAccount:
                 type: object
                 description: Kubernetes service account that will assume the IAM role.
@@ -103,7 +100,6 @@ spec:
                 required:
                 - name
                 - namespace
-                type: object
               tags:
                 type: object
                 description: AWS tags to apply to all resources. Merged with default tag (hops=true).
@@ -119,50 +115,33 @@ spec:
               ready:
                 type: boolean
                 description: Whether all composed resources are ready.
-              accountId:
-                type: string
-              oidc:
-                type: object
-                properties:
-                  issuer:
-                    type: string
-                  providerArn:
-                    type: string
-              policy:
-                type: object
-                properties:
-                  arn:
-                    type: string
-                  name:
-                    type: string
               role:
                 type: object
+                description: Observed state from the IAM Role.
                 properties:
                   arn:
                     type: string
+                    description: ARN of the IAM role - use this for ServiceAccount annotations.
                   name:
                     type: string
-                  permissionsBoundary:
-                    type: string
-              serviceAccount:
+                    description: Name of the IAM role in AWS.
+              policy:
                 type: object
+                description: Observed state from the IAM Policy.
                 properties:
+                  arn:
+                    type: string
+                    description: ARN of the IAM policy.
                   name:
                     type: string
-                  namespace:
-                    type: string
-                  subject:
-                    type: string
-              spec:
+                    description: Name of the IAM policy in AWS.
+              attachment:
                 type: object
-                description: Debugging information showing raw and effective spec values.
+                description: Observed state from the RolePolicyAttachment.
                 properties:
-                  raw:
-                    type: object
-                    x-kubernetes-preserve-unknown-fields: true
-                  effective:
-                    type: object
-                    x-kubernetes-preserve-unknown-fields: true
+                  id:
+                    type: string
+                    description: ID of the role-policy attachment in AWS.
             type: object
         required:
         - spec

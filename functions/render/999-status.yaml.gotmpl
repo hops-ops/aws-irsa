@@ -5,25 +5,11 @@ apiVersion: {{ $xr.apiVersion }}
 kind: {{ $xr.kind }}
 status:
   ready: {{ $s.ready }}
-  accountId: "{{ $s.accountId }}"
-  oidc:
-    issuer: "{{ $s.oidc.issuer }}"
-    providerArn: "{{ $s.oidc.providerArn }}"
   role:
-    name: "{{ $s.role.name }}"
-    arn: "{{ $s.role.arn }}"
-    {{- if $s.role.permissionsBoundary }}
-    permissionsBoundary: "{{ $s.role.permissionsBoundary }}"
-    {{- end }}
+    arn: {{ $s.role.arn | default "" | quote }}
+    name: {{ $s.role.name | default "" | quote }}
   policy:
-    name: "{{ $s.policy.name }}"
-    arn: "{{ $s.policy.arn }}"
-  serviceAccount:
-    name: "{{ $s.serviceAccount.name }}"
-    namespace: "{{ $s.serviceAccount.namespace }}"
-    subject: "{{ $s.serviceAccount.subject }}"
-  spec:
-    raw:
-      {{- toYaml $s.spec.raw | nindent 6 }}
-    effective:
-      {{- toYaml $s.spec.effective | nindent 6 }}
+    arn: {{ $s.policy.arn | default "" | quote }}
+    name: {{ $s.policy.name | default "" | quote }}
+  attachment:
+    id: {{ $s.attachment.id | default "" | quote }}

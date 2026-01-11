@@ -213,18 +213,30 @@ kubectl get irsa my-app -n production -o jsonpath='{.status.role.arn}'
 
 ## Status
 
-The IRSA resource exposes these status fields:
+The IRSA resource exposes typed status fields from the created AWS resources:
 
 | Field | Description |
 |-------|-------------|
 | `ready` | Whether all composed resources are ready |
-| `role.arn` | ARN of the created IAM role |
-| `role.name` | Name of the IAM role |
-| `policy.arn` | ARN of the created IAM policy |
-| `policy.name` | Name of the IAM policy |
-| `serviceAccount.subject` | OIDC subject for the service account |
-| `spec.raw` | Original spec as provided |
-| `spec.effective` | Spec with all defaults applied |
+| `role.arn` | ARN of the IAM role - use for ServiceAccount annotations |
+| `role.name` | Name of the IAM role in AWS |
+| `policy.arn` | ARN of the IAM policy |
+| `policy.name` | Name of the IAM policy in AWS |
+| `attachment.id` | ID of the role-policy attachment in AWS |
+
+Example:
+```yaml
+status:
+  ready: true
+  role:
+    arn: "arn:aws:iam::123456789012:role/cluster-x-loki"
+    name: "cluster-x-loki"
+  policy:
+    arn: "arn:aws:iam::123456789012:policy/cluster-x-loki"
+    name: "cluster-x-loki"
+  attachment:
+    id: "cluster-x-loki-20240115123456789"
+```
 
 ## Composed Resources
 
