@@ -4,3 +4,4 @@ _output
 .tmp
 **/aws-creds
 tests/**/secrets/*
+tests/**/env/

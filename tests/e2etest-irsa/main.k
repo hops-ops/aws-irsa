@@ -25,10 +25,10 @@ _test_policy_document = """{
 # Unique cluster name so multiple runs don't conflict in AWS
 _test_cluster = "e2e-irsa-" + _now
 _namespace = "default"
-_region = "us-east-2"
+_region = file.read("env/AWS_REGION").strip()
 
-# AWS account ID for E2E tests - update this for your environment
-_account_id = "034489662075"
+# AWS account ID for E2E tests
+_account_id = file.read("env/AWS_ACCOUNT_ID").strip()
 
 _items = [
     metav1alpha1.E2ETest {
